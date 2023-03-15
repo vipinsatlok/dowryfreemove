@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<%- include("../include/nav.ejs") %>
+
+  <main class="p-5 flex flex-col gap-5">
+    <section>
+        <h1 class="text-3xl font-bold text-black-300">Pending Posts (<%= totalData  %>)</h1>
+    </section>
+      <%- include("../include/cards.ejs", {data, options : true, paramsUserId : "", userId : user._id}) %>
+      <%- include("../include/pagination.ejs", {isProfileUrl : "pending", paramsUserId : ""}) %>
+  </main>
+
+<%- include("../include/footer.ejs") %>

@@ -1,0 +1,37 @@
+<%- include("../include/head.ejs") %>
+  <%- include("../include/nav.ejs") %>
+    <main class="p-5 flex flex-col gap-5">
+    
+        <section class="w-full flex justify-center border-solid border-b border-gray-300">
+            <div class="w-full max-w-sm bg-white rounded-lg  dark:bg-gray-800 dark:border-gray-700">
+                <div class="flex flex-col items-center py-5">
+                
+                    <% const userId = String(user._id).split("(")[0] || "" %>
+                    <% const paramsUserId = String(paramsUser._id).split("(")[0] %>
+                    <% const profileUrl =  userId === paramsUserId ? user.avatar.replace("=s96-c", "") : paramsUser.avatar.replace("=s96-c", "")  %>
+                    <% const profileName =  userId === paramsUserId ? user.name : paramsUser.name  %>
+                    <% const profileEmail =  userId === paramsUserId ? user.email : paramsUser.email  %>
+                    <% const profileRole =  userId === paramsUserId ? user.role : paramsUser.role  %>
+                
+                    <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src="<%= profileUrl %>"/>
+                   
+                    <h6 class="text-xs font-medium text-white mb-2 bg-blue-500 rounded-full p-1 px-4 dark:text-white"><%= userId === paramsUserId ? "You are" : "This is" %> <b><%= profileRole %></b></h6>
+                    <h5 class="mb-1 text-3xl font-medium text-gray-900 dark:text-white"><%= profileName %></h5>
+                    <% if(userId === paramsUserId || user.role === "admin") { %>
+                      <span class="text-sm text-gray-500 dark:text-gray-400"><%= profileEmail %></span> 
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        
+        <% if(userId === paramsUserId) { %>
+            <%- include("../include/upload.ejs") %>
+        <% } %>
+        <%- include("../include/cards.ejs", { options : false, paramsUserId, userId }) %>
+        <%- include("../include/pagination.ejs", {isProfileUrl : "profile", paramsUserId}) %>
+        
+    </main>
+    <%- include("../include/footer.ejs") %>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.js"></script>
+  </body>
+</html>

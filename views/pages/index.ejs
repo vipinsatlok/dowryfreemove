@@ -1,0 +1,10 @@
+<%- include("../include/head.ejs") %>
+<%- include("../include/nav.ejs") %>
+
+  <main class="p-5 flex w-full items-center flex-col gap-5">
+      <%- include("../include/upload.ejs") %>
+      <%- include("../include/cards.ejs", {data, options : false, paramsUserId : "", userId : user._id}) %>
+      <%- include("../include/pagination.ejs", {isProfileUrl : "home", paramsUserId : ""}) %>
+  </main>
+
+<%- include("../include/footer.ejs") %>

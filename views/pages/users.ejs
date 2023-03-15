@@ -1,0 +1,53 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.3/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+
+<%- include("../include/nav.ejs") %>
+
+  <main class="p-5 flex flex-col gap-5">
+    <section>
+        <h1 class="text-3xl font-bold text-black-300">Users (<%= totalData  %>)</h1>
+        
+        <ul class="max-w-md mt-5 divide-y divide-gray-200 dark:divide-gray-700">
+        
+            <% data.map(item => { %>
+                
+                    <li class="py-2 sm:pb-4">
+                        <div class="flex items-center space-x-4">
+            
+                            <div class="flex-shrink-0">
+                              <a href="/user/<%= item._id %>">
+                                  <img class="w-8 h-8 rounded-full" src="<%= item.avatar %>" alt="<%= item.name %>">
+                              </a>
+                            </div>
+                            <div class="flex-1 min-w-0">
+                              <a href="/user/<%= item._id %>">
+                                    <p class="text-sm font-medium text-gray-900 truncate dark:text-white">
+                                    <%= item.name %>
+                                    </p>
+                                    <p class="text-sm text-gray-500 truncate dark:text-gray-400">
+                                    <%= item.email %>
+                                    </p>
+                                  </a>
+                            </div>
+                            <button onclick="deleteUser('<%= item._id %>')" class="inline-flex bg-blue-500 rounded-full px-4 p-2 items-center text-xs font-medium text-white dark:text-white">
+                               Remove
+                            </button>
+                        </div>
+                    </li>
+                
+          <% }) %>
+        </ul>
+        
+    </section>
+    <%- include("../include/pagination.ejs", {isProfileUrl : "users", paramsUserId : ""}) %>
+
+  </main>
+
+<%- include("../include/footer.ejs") %>
